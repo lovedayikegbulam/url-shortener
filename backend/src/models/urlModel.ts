@@ -1,4 +1,3 @@
-// src/models/urlModel.ts
 import { Schema, model, Document } from 'mongoose';
 
 interface IUrl extends Document {

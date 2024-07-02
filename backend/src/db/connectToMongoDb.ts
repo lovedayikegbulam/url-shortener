@@ -1,6 +1,6 @@
 import mongoose from "mongoose";
-import CONFIG from "../src/config/config";
-import logger from "../src/logger/logger";
+import CONFIG from "../config/config";
+import logger from "../logger/logger";
 
 const connectToMongoDb = async (): Promise<void> => {
   const MONGODB_URI = CONFIG.MONGODB_URI;
@@ -8,9 +8,9 @@ const connectToMongoDb = async (): Promise<void> => {
   if (MONGODB_URI) {
     try {
       await mongoose.connect(MONGODB_URI);
-      logger.info("Connection to DB successful");
+      logger.info("Connection to MongoDB successful");
     } catch (error) {
-      logger.info("Connection to DB failed");
+      logger.info("Connection to MongoDB failed");
       logger.error(error);
     }
   } else {
@@ -19,11 +19,11 @@ const connectToMongoDb = async (): Promise<void> => {
 
   // Add event listeners
   mongoose.connection.on("connected", () => {
-    logger.info("Connection to DB successful");
+    logger.info("Connection to MongoDB successful");
   });
 
   mongoose.connection.on("error", (err: any) => {
-    logger.info("Connection to DB failed");
+    logger.info("Connection to MongoDB failed");
     logger.error(err);
   });
 };
