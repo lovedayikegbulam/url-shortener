@@ -9,17 +9,23 @@ import helmet from "helmet";
 import corsOptions from "./utils/corsOptions";
 import redis from "./db/connectToRedis";
 
+//initialize express
 const app = express();
 
-
+// parse body 
 app.use(express.json());
+
+//security middlewares
 app.use(cors(corsOptions));
 app.use(helmet());
 app.use(limiter);
-app.use('', redirectRoute);
+
+//Routes
 app.use('/api/auth', authRoutes);
 app.use("/api", urlRoutes);
+app.use('', redirectRoute);
 
+//Connect to databases
 connectToMongoDb();
 redis.connect();
 
