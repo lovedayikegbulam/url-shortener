@@ -2,7 +2,7 @@ import express from "express";
 import urlRoutes from "./routes/urlRoutes";
 import authRoutes from './routes/authRoutes';
 import redirectRoute from "./routes/redirectRoute"
-import limiter from "./middlewares/rateLimiter";
+import limiter from "./utils/rateLimiter";
 import connectToMongoDb from "./db/connectToMongoDb";
 import cors from 'cors';
 import helmet from "helmet";
