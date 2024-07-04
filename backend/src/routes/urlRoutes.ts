@@ -14,6 +14,6 @@ router.post("/shorten", auth, shortenUrl);
 router.post("/generate-qr", auth, getQrCode);
 router.get("/analytics/:shortUrl", auth, getLinkAnalytics);
 router.get("/history", auth, getLinkHistory);
-router.get("/:shortUrl", auth, redirectUrl);
+router.get("/:shortUrl", redirectUrl);
 
 export default router;

@@ -56,6 +56,8 @@ export const createShortUrl = async (
   // If custom URL is not provided, set it to the short URL
   if (!customUrl) {
     customUrl = shortUrl;
+  }else{
+    customUrl = `${domainName}${customUrl}`
   }
 
   // Create a new URL document
