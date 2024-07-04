@@ -1,18 +1,34 @@
-import CONFIG from '../config/config';
-import jwt from 'jsonwebtoken';
 import { Request, Response, NextFunction } from 'express';
+import jwt from 'jsonwebtoken';
+import User, { IUser } from '../models/User';
+import CONFIG from "../config/config";
 
-interface AuthRequest extends Request {
-  user?: any;
+const JWT_SECRET = CONFIG.JWT_SECRET || 'your_secret_key';
+
+export interface AuthRequest extends Request {
+  user?: IUser;
 }
 
-export const authenticateToken = (req: AuthRequest, res: Response, next: NextFunction) => {
-  const token = req.headers['authorization']?.split(' ')[1];
-  if (!token) return res.sendStatus(401);
+const auth = async (req: AuthRequest, res: Response, next: NextFunction) => {
+  const authHeader = req.header('Authorization');
 
-  jwt.verify(token, CONFIG.JWT_SECRET as string, (err, user) => {
-    if (err) return res.sendStatus(403);
+  if (!authHeader || !authHeader.startsWith('Bearer ')) {
+    return res.status(401).json({ msg: 'No token, authorization denied' });
+  }
+
+  const token = authHeader.split(' ')[1];
+
+  try {
+    const decoded: any = jwt.verify(token, JWT_SECRET);
+    const user = await User.findById(decoded.user.id).select('-password');
+    if (!user) {
+      return res.status(401).json({ msg: 'User not found, authorization denied' });
+    }
     req.user = user;
     next();
-  });
+  } catch (err) {
+    res.status(401).json({ msg: 'Token is not valid' });
+  }
 };
+
+export default auth;

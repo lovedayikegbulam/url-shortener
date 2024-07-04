@@ -8,16 +8,18 @@ import {
   getHistory,
 } from '../services/urlService';
 import { isValidUrl } from '../utils/validateUrl';
+import { AuthRequest } from '../middlewares/auth';
 
-const shortenUrl = async (req: Request, res: Response): Promise<Response> => {
+const shortenUrl = async (req: AuthRequest, res: Response): Promise<Response> => {
   const { longUrl, customUrl } = req.body;
+  const userId = req.user?.id;
 
   if (!isValidUrl(longUrl)) {
     return res.status(400).send('Invalid URL');
   }
 
   try {
-    const url = await createShortUrl(longUrl, customUrl);
+    const url = await createShortUrl(longUrl, customUrl, userId); // Pass the userId
     return res.json({ shortUrl: url.shortUrl });
   } catch (err) {
     return res.status(500).send('Error creating shortened URL');
@@ -40,7 +42,7 @@ const redirectUrl = async (req: Request, res: Response): Promise<void> => {
   }
 };
 
-const getQrCode = async (req: Request, res: Response): Promise<Response> => {
+const getQrCode = async (req: AuthRequest, res: Response): Promise<Response> => {
   const { shortUrl } = req.body;
 
   try {
@@ -51,22 +53,23 @@ const getQrCode = async (req: Request, res: Response): Promise<Response> => {
   }
 };
 
-const getLinkAnalytics = async (req: Request, res: Response): Promise<Response> => {
-
+const getLinkAnalytics = async (req: AuthRequest, res: Response): Promise<Response> => {
   const { shortUrl } = req.params;
+  const userId = req.user?.id;
 
   try {
-    const analytics = await getAnalytics(shortUrl);
+    const analytics = await getAnalytics(shortUrl, userId); // Pass the userId
     return res.json(analytics);
   } catch (err) {
     return res.status(500).send('Error retrieving link analytics');
   }
 };
 
+const getLinkHistory = async (req: AuthRequest, res: Response) => {
+  const userId = req.user?.id;
 
-const getLinkHistory = async (req: Request, res: Response) => {
   try {
-    const urls = await getHistory();
+    const urls = await getHistory(userId); // Pass the userId
     if (urls.length === 0) {
       return res.status(404).json({ message: 'No URLs found' });
     }
@@ -75,7 +78,6 @@ const getLinkHistory = async (req: Request, res: Response) => {
     res.status(500).json({ message: (error as Error).message });
   }
 };
-
 
 export {
   shortenUrl,

@@ -1,19 +1,19 @@
-import { Router } from 'express';
+import { Router } from "express";
 import {
   shortenUrl,
   redirectUrl,
   getQrCode,
   getLinkAnalytics,
   getLinkHistory,
-} from '../controllers/urlController';
+} from "../controllers/urlController";
+import auth from "../middlewares/auth";
 
 const router = Router();
 
-router.post('/shorten', shortenUrl);
-router.post('/generate-qr', getQrCode);
-router.get('/analytics/:shortUrl', getLinkAnalytics);
-router.get('/history', getLinkHistory);
-router.get('/:shortUrl', redirectUrl);
-
+router.post("/shorten", auth, shortenUrl);
+router.post("/generate-qr", auth, getQrCode);
+router.get("/analytics/:shortUrl", auth, getLinkAnalytics);
+router.get("/history", auth, getLinkHistory);
+router.get("/:shortUrl", auth, redirectUrl);
 
 export default router;
