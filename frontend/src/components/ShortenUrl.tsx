@@ -10,6 +10,7 @@ const ShortenUrl: React.FC = () => {
     e.preventDefault();
     const result = await shortenUrl(longUrl, customUrl);
     setShortUrl(result.shortUrl);
+    console.log(shortUrl)
   };
 
   return (

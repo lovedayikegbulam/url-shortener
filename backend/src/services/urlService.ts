@@ -4,7 +4,8 @@ import client from "../db/connectToRedis";
 import axios from "axios";
 
 const generateShortUrl = (longUrl: string): string => {
-  return createHash("sha256").update(longUrl).digest("base64").slice(0, 6);
+  const newUrl = createHash("sha256").update(longUrl).digest("base64").slice(0, 6);
+  return `http://localhost:3000/${newUrl}`
 };
 
 const getCachedUrl = async (shortUrl: string): Promise<string | null> => {
@@ -55,8 +56,23 @@ const generateQrCode = async (shortUrl: string): Promise<string> => {
   return response.request.res.responseUrl;
 };
 
-const getHistory = async (): Promise<IUrl[]> => {
-  return await Url.find({});
+const getAnalytics = async (shortUrl: string): Promise<number> => {
+  const urlData: IUrl | null = await Url.findOne({ shortUrl });
+
+  if (!urlData) {
+    throw new Error('URL not found');
+  }
+
+  return urlData.clicks;
+};
+
+const getHistory = async (): Promise<Partial<IUrl>[]> => {
+  try {
+    const urls = await Url.find({}, 'longUrl shortUrl customUrl');
+    return urls;
+  } catch (error) {
+    throw new Error('Error retrieving URL history');
+  }
 };
 
 export {
@@ -64,5 +80,6 @@ export {
   getLongUrl,
   incrementClick,
   generateQrCode,
+  getAnalytics,
   getHistory,
 };

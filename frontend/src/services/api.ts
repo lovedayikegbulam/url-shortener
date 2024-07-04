@@ -14,6 +14,11 @@ export const generateQrCode = async (shortUrl: string) => {
   return response.data;
 };
 
+export const getLinkAnalytics = async (shortUrl: string) => {
+  const response = await api.get(`$/analytics/${shortUrl}`);
+  return response.data;
+};
+
 export const getLinkHistory = async () => {
   const response = await api.get('/history');
   return response.data;
