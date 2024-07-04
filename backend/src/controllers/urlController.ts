@@ -22,6 +22,10 @@ const shortenUrl = async (req: AuthRequest, res: Response): Promise<Response> =>
     const url = await createShortUrl(longUrl, customUrl, userId); // Pass the userId
     return res.json({ shortUrl: url.shortUrl });
   } catch (err) {
+    console.error(err);
+    if ((err as Error).message === 'Custom URL already exists') {
+      return res.status(400).json({ message: (err as Error).message });
+    }
     return res.status(500).send('Error creating shortened URL');
   }
 };
@@ -55,10 +59,10 @@ const getQrCode = async (req: AuthRequest, res: Response): Promise<Response> => 
 
 const getLinkAnalytics = async (req: AuthRequest, res: Response): Promise<Response> => {
   const { shortUrl } = req.params;
-  const userId = req.user?.id;
+  // const userId = req.user?.id;
 
   try {
-    const analytics = await getAnalytics(shortUrl, userId); // Pass the userId
+    const analytics = await getAnalytics(shortUrl); 
     return res.json(analytics);
   } catch (err) {
     return res.status(500).send('Error retrieving link analytics');
