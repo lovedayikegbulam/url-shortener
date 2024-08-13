@@ -5,7 +5,7 @@
   "main": "index.js",
   "scripts": {
     "start": "npx ts-node src/server.ts",
-    "build": "npm install",
+    "build": "npm install && tsc",
     "dev": "nodemon src/server.ts",
     "test": "jest",
     "test:watch": "jest --watch",
