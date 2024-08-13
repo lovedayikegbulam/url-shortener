@@ -1,7 +1,7 @@
 import request from "supertest";
-import { app } from "../app";
+import app from "../app";
 import { Url } from "../models/urlModel";
-import client from "../db/connectToRedis";
+// import client from "../db/connectToRedis";
 import { AuthRequest } from '../middlewares/auth';
 import axios from "axios";
 

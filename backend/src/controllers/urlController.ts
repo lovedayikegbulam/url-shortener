@@ -20,7 +20,7 @@ const shortenUrl = async (req: AuthRequest, res: Response): Promise<Response> =>
 
   try {
     const url = await createShortUrl(longUrl, customUrl, userId); // Pass the userId
-    return res.json({ shortUrl: url.shortUrl });
+    return res.status(200).json({ shortUrl: url.shortUrl });
   } catch (err) {
     console.error(err);
     if ((err as Error).message === 'Custom URL already exists') {
@@ -37,7 +37,7 @@ const redirectUrl = async (req: Request, res: Response): Promise<void> => {
     const longUrl = await getLongUrl(shortUrl);
     if (longUrl) {
       await incrementClick(shortUrl);
-      res.redirect(longUrl);
+      res.status(200).redirect(longUrl);
     } else {
       res.status(404).send('URL not found');
     }
@@ -51,7 +51,7 @@ const getQrCode = async (req: AuthRequest, res: Response): Promise<Response> => 
 
   try {
     const qrCodeUrl = await generateQrCode(shortUrl);
-    return res.json({ qrCodeUrl });
+    return res.status(200).json({ qrCodeUrl });
   } catch (err) {
     return res.status(500).send('Error generating QR code');
   }
@@ -63,7 +63,7 @@ const getLinkAnalytics = async (req: AuthRequest, res: Response): Promise<Respon
 
   try {
     const analytics = await getAnalytics(shortUrl); 
-    return res.json(analytics);
+    return res.status(200).json(analytics);
   } catch (err) {
     return res.status(500).send('Error retrieving link analytics');
   }

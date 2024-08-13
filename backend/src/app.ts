@@ -29,4 +29,4 @@ app.use('', redirectRoute);
 connectToMongoDb();
 redis.connect();
 
-export { app };
+export default app;
