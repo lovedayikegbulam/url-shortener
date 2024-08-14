@@ -111,14 +111,14 @@
   "compilerOptions": {
     "target": "es6",
     "module": "commonjs",
-    "strict": true,
+    "strict": false,
     "esModuleInterop": true,
     "skipLibCheck": true,
     "forceConsistentCasingInFileNames": true,
     "outDir": "./dist",
     "rootDir": "./src",
     "typeRoots": ["./node_modules/@types"],
-    "types": []
+    "types": ["node", "jest"]
   },
   "include": ["src/**/*.ts", "tests/**/*.ts"],
   "exclude": ["node_modules", "dist"]
