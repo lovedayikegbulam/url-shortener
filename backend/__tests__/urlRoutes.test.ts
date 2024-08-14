@@ -1,8 +1,8 @@
 import request from "supertest";
-import app from "../app";
-import { Url } from "../models/urlModel";
-// import client from "../db/connectToRedis";
-import { AuthRequest } from '../middlewares/auth';
+import app from "../src/app";
+import { Url } from "../src/models/urlModel";
+import client from "../src/db/connectToRedis";
+import { AuthRequest } from '../src/middlewares/auth';
 import axios from "axios";
 
 jest.mock("../models/urlModel");

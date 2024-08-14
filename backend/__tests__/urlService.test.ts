@@ -7,7 +7,7 @@ import {
   generateQrCode,
   getAnalytics,
   getHistory,
-} from '../src/services/urlService';
+} from '../src/services/urlService.js';
 import axios from 'axios';
 import { mocked } from 'jest-mock';
 

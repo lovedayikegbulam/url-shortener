@@ -1,0 +1,14 @@
+{
+    "compilerOptions": {
+      "target": "ES6",
+      "module": "commonjs",
+      "strict": true,
+      "esModuleInterop": true,
+      "noEmit": true,  // Do not emit .js files
+      "skipLibCheck": true  // Skips type checking of all declaration files
+    },
+    "include": ["__tests__/**/*.ts"],
+    "exclude": ["node_modules"]
+  }
+  
+  
