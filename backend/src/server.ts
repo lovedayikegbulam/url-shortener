@@ -1,7 +1,8 @@
 // src/server.ts
 import app  from './app';
 import logger from './logger/logger';
-import CONFIG from '../src/config/config'
+
+import CONFIG from './config/config'
 
 const PORT = process.env.PORT || 3000;
 
