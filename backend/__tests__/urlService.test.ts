@@ -1,5 +1,5 @@
-import { Url } from '../src/models/urlModel';
-import client from '../src/db/connectToRedis';
+import { Url } from '../src/models/urlModel.js';
+import client from '../src/db/connectToRedis.js';
 import {
   createShortUrl,
   getLongUrl,
