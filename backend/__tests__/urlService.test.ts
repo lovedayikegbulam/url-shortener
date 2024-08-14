@@ -1,5 +1,5 @@
-import { Url } from '../models/urlModel';
-import client from '../db/connectToRedis';
+import { Url } from '../src/models/urlModel';
+import client from '../src/db/connectToRedis';
 import {
   createShortUrl,
   getLongUrl,
@@ -7,7 +7,7 @@ import {
   generateQrCode,
   getAnalytics,
   getHistory,
-} from '../services/urlService';
+} from '../src/services/urlService';
 import axios from 'axios';
 import { mocked } from 'jest-mock';
 
