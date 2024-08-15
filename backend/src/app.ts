@@ -28,7 +28,9 @@ app.use("/api", urlRoutes);
 // Handle the base route
 app.get("", (req, res) => {
   res.status(200);
-  res.json("Welcome");
+  res.json({
+    message: "Welcome",
+  });
 });
 
 // catch all route
