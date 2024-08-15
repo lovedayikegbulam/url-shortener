@@ -21,7 +21,7 @@ const shortenUrl = async (req: Request, res: Response): Promise<Response> => {
   const userId = req.user?.id;
 
   if (!isValidUrl(longUrl)) {
-    return res.status(400).send('Invalid URL');
+    return res.status(400).send({ message: 'Invalid URL'});
   }
 
   try {
@@ -32,7 +32,7 @@ const shortenUrl = async (req: Request, res: Response): Promise<Response> => {
     if ((err as Error).message === 'Custom URL already exists') {
       return res.status(400).json({ message: (err as Error).message });
     }
-    return res.status(500).send('Error creating shortened URL');
+    return res.status(500).send({ message: 'Error creating shortened URL' });
   }
 };
 
@@ -48,10 +48,10 @@ const redirectUrl = async (req: Request, res: Response): Promise<void> => {
       await incrementClick(shortUrl);
       res.status(200).redirect(longUrl);
     } else {
-      res.status(404).send('URL not found');
+      res.status(404).send({ message: 'URL not found' });
     }
   } catch (err) {
-    res.status(500).send('Error redirecting URL');
+    res.status(500).send({ message: 'Error redirecting URL' });
   }
 };
 
@@ -62,7 +62,7 @@ const getQrCode = async (req: Request, res: Response): Promise<Response> => {
     const qrCodeUrl = await generateQrCode(shortUrl);
     return res.status(200).json({ qrCodeUrl });
   } catch (err) {
-    return res.status(500).send('Error generating QR code');
+    return res.status(500).send({ message: 'Error generating QR code' });
   }
 };
 
