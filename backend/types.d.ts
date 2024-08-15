@@ -10,6 +10,7 @@ declare namespace NodeJS {
       REDIS_HOST?: string;
       REDIS_PORT?: string;
       NODE_ENV?: string
+      DOMAIN_NAME?: string;
     }
   }
   
