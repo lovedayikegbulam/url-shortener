@@ -5,6 +5,6 @@ import {
 
 const router = Router();
 
-router.get("/:shortUrl", redirectUrl);
+router.get("/:id", redirectUrl);
 
 export default router;

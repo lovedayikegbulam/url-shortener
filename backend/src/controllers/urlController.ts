@@ -36,9 +36,15 @@ const shortenUrl = async (req: Request, res: Response): Promise<Response> => {
 };
 
 const redirectUrl = async (req: Request, res: Response): Promise<void> => {
+
+  // console.log('Request Params:', req.params); // Log the whole params object
+
   const { id } = req.params;
 
   const shortUrl = `${domainName}${id}`
+
+  // console.log('ID:', id); // Debugging line
+  // console.log('Short URL:', shortUrl); // Debugging line
 
   try {
     const longUrl = await getLongUrl(shortUrl);

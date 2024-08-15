@@ -21,9 +21,9 @@ app.use(helmet());
 app.use(limiter);
 
 //Routes
+app.use('', redirectRoute);
 app.use('/api/auth', authRoutes);
 app.use("/api", urlRoutes);
-app.use('', redirectRoute);
 
 //Connect to databases
 connectToMongoDb();
