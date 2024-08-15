@@ -117,7 +117,7 @@ npm run test
 
 - **Shorten URL**
 
-  - `POST /api/url/shorten`
+  - `POST /api/shorten`
   - Headers: `Authorization: Bearer <token>`
   - Request Body:
     ```json
@@ -138,7 +138,7 @@ npm run test
 
 - **Generate QR Code**
 
-  - `POST /api/url/generate-qr`
+  - `POST /api/generate-qr`
   - Headers: `Authorization: Bearer <token>`
   - Request Body:
     ```json
@@ -152,7 +152,7 @@ npm run test
 
 - **Get Link Analytics**
 
-  - `GET /api/url/analytics`
+  - `GET /api/analytics`
   - Headers: `Authorization: Bearer <token>`
   - Request Body:
     ```json
@@ -166,9 +166,23 @@ npm run test
 
 - **Get Link History**
 
-  - `GET /api/url/history`
+  - `GET /api/history`
   - Headers: `Authorization: Bearer <token>`
   - Response: Returns a list of URLs shortened by the authenticated user.
+
+  #### Delete
+
+- **Delete Short Url**
+
+  - `Delete /api/delete`
+  - Headers: `Authorization: Bearer <token>`
+  - Request Body:
+    ```json
+    {
+      "message": "URL deleted successfully"
+    }
+    ```
+  - Response: Returns that the Url have been deleted successfully.
 
 
 ## Additional Notes
