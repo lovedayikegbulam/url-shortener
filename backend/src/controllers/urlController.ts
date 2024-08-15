@@ -45,6 +45,8 @@ const redirectUrl = async (req: Request, res: Response): Promise<void> => {
 
   const shortUrl = `${host}${id}`
 
+  console.log(shortUrl)
+
   try {
     const longUrl = await getLongUrl(shortUrl);
     if (longUrl) {
