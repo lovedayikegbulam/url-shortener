@@ -113,10 +113,29 @@ const getHistory = async (userId: string | undefined): Promise<Partial<IUrl>[]> 
   }
 };
 
+const deleteUrl = async (shortUrl: string, userId?: string): Promise<boolean> => {
+
+  // Check if the URL exists and belongs to the user
+  const url = await Url.findOne({ shortUrl, user: userId });
+
+  if (!url) {
+    return false; 
+  }
+
+  // If found, delete the URL
+  await Url.deleteOne({ _id: url._id });
+
+  // Remove the URL from cache
+  await client.del(shortUrl);
+
+  return true; 
+};
+
 export {
   getLongUrl,
   incrementClick,
   generateQrCode,
   getAnalytics,
   getHistory,
+  deleteUrl
 };

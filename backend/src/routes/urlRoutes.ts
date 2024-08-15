@@ -4,6 +4,7 @@ import {
   getQrCode,
   getLinkAnalytics,
   getLinkHistory,
+  deleteShortUrl
 } from "../controllers/urlController";
 import auth from "../middlewares/auth";
 
@@ -13,5 +14,6 @@ router.post("/shorten", auth, shortenUrl);
 router.post("/generate-qr", auth, getQrCode);
 router.get("/analytics", auth, getLinkAnalytics);
 router.get("/history", auth, getLinkHistory);
+router.delete("/delete", auth, deleteShortUrl); 
 
 export default router;

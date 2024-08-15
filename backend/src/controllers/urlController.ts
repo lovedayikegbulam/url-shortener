@@ -6,6 +6,7 @@ import {
   generateQrCode,
   getAnalytics,
   getHistory,
+  deleteUrl
 } from '../services/urlService';
 import { isValidUrl } from '../utils/validateUrl';
 // import { Request, Response } from '../middlewares/auth';
@@ -91,10 +92,25 @@ const getLinkHistory = async (req: Request, res: Response) => {
   }
 };
 
+const deleteShortUrl = async (req: Request, res: Response): Promise<Response> => {
+  const { shortUrl } = req.body; 
+  const userId = req.user?.id; 
+  try {
+    const isDeleted = await deleteUrl(shortUrl, userId);
+    if (!isDeleted) {
+      return res.status(404).json({ message: 'URL not found or not authorized' });
+    }
+    return res.status(200).json({ message: 'URL deleted successfully' });
+  } catch (err) {
+    return res.status(500).json({ message: (err as Error).message });
+  }
+};
+
 export {
   shortenUrl,
   redirectUrl,
   getQrCode,
   getLinkAnalytics,
   getLinkHistory,
+  deleteShortUrl
 };
