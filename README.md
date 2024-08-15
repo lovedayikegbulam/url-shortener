@@ -170,43 +170,6 @@ npm run test
   - Headers: `Authorization: Bearer <token>`
   - Response: Returns a list of URLs shortened by the authenticated user.
 
-## Project Structure
-
-```plaintext
-.
-├── src
-│   ├── config
-│   │   └── config.ts          # Configuration file
-│   ├── controllers
-│   │   ├── authController.ts  # Authentication controller
-│   │   └── urlController.ts   # URL shortening controller
-│   ├── db
-│   │   └── connectToRedis.ts  # Redis connection
-│   ├── middlewares
-│   │   └── auth.ts            # Authentication middleware
-│   ├── models
-│   │   ├── User.ts            # User model
-│   │   └── urlModel.ts        # URL model
-│   ├── routes
-│   │   ├── authRoutes.ts      # Authentication routes
-│   │   └── urlRoutes.ts       # URL shortening routes
-│   ├── services
-│   │   └── urlService.ts      # URL shortening service
-│   ├── types
-│   │   └── express.d.ts       # Express request type extension
-│   └── utils
-│       └── validateUrl.ts     # URL validation utility
-├── __tests__
-│   ├── authController.test.ts # Tests for authentication
-│   ├── urlService.test.ts     # Tests for URL shortening service
-│   ├── urlRoutes.test.ts      # Tests for URL routes
-│   └── config.test.ts         # Tests for configuration
-├── .env                       # Environment variables
-├── tsconfig.json              # TypeScript configuration
-├── tsconfig.test.json         # TypeScript configuration for tests
-├── package.json               # npm dependencies and scripts
-└── README.md                  # Project documentation
-```
 
 ## Additional Notes
 
