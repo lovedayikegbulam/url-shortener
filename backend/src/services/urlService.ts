@@ -3,7 +3,7 @@ import { createHash, randomBytes } from 'crypto';
 import client from '../db/connectToRedis';
 import axios from 'axios';
 
-const domainName = 'http://localhost:3000/';
+const domainName = 'https://url-shortener-n8yf.onrender.com/';
 
 const generateShortUrl = (longUrl: string, salt: string): string => {
   const newUrl = createHash('sha256').update(longUrl + salt).digest('base64').slice(0, 6);
