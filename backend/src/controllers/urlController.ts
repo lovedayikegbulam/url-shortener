@@ -8,9 +8,9 @@ import {
   getHistory,
 } from '../services/urlService';
 import { isValidUrl } from '../utils/validateUrl';
-import { AuthRequest } from '../middlewares/auth';
+// import { Request } from '../middlewares/auth';
 
-const shortenUrl = async (req: AuthRequest, res: Response): Promise<Response> => {
+const shortenUrl = async (req: Request, res: Response): Promise<Response> => {
   const { longUrl, customUrl } = req.body;
   const userId = req.user?.id;
 
@@ -46,7 +46,7 @@ const redirectUrl = async (req: Request, res: Response): Promise<void> => {
   }
 };
 
-const getQrCode = async (req: AuthRequest, res: Response): Promise<Response> => {
+const getQrCode = async (req: Request, res: Response): Promise<Response> => {
   const { shortUrl } = req.body;
 
   try {
@@ -57,7 +57,7 @@ const getQrCode = async (req: AuthRequest, res: Response): Promise<Response> => 
   }
 };
 
-const getLinkAnalytics = async (req: AuthRequest, res: Response): Promise<Response> => {
+const getLinkAnalytics = async (req: Request, res: Response): Promise<Response> => {
   const { shortUrl } = req.params;
   // const userId = req.user?.id;
 
@@ -69,7 +69,7 @@ const getLinkAnalytics = async (req: AuthRequest, res: Response): Promise<Respon
   }
 };
 
-const getLinkHistory = async (req: AuthRequest, res: Response) => {
+const getLinkHistory = async (req: Request, res: Response) => {
   const userId = req.user?.id;
 
   try {

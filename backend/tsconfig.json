@@ -1,18 +1,37 @@
+// {
+//   "compilerOptions": {
+//     "outDir": "./dist",   // Output directory
+//     "rootDir": "./src",   // Root directory for source files
+//     "baseUrl": "./src",   // Base directory for non-relative module names
+//     "paths": {
+//       "*": ["*"]
+//     },
+//     "moduleResolution": "node",
+//     "esModuleInterop": true,
+//     "resolveJsonModule": true,
+//     "skipLibCheck": true,
+//     "target": "ES6",
+//     "module": "commonjs"
+//   },
+//   "include": ["src/**/*.ts"],
+//   "exclude": ["node_modules", "dist"]
+// }
+
 {
   "compilerOptions": {
-    "outDir": "./dist",   // Output directory
-    "rootDir": "./src",   // Root directory for source files
-    "baseUrl": "./src",   // Base directory for non-relative module names
-    "paths": {
-      "*": ["*"]
-    },
-    "moduleResolution": "node",
-    "esModuleInterop": true,
-    "resolveJsonModule": true,
-    "skipLibCheck": true,
-    "target": "ES6",
-    "module": "commonjs"
+      "module": "commonjs",
+      "moduleResolution": "node",
+      "pretty": true,
+      "sourceMap": true,
+      "target": "es6",
+      "outDir": "./dist",
+      "baseUrl": "./lib"
   },
-  "include": ["src/**/*.ts"],
-  "exclude": ["node_modules", "dist"]
+  "include": [
+      "lib/**/*.ts"
+  ],
+  "exclude": [
+      "node_modules"
+  ],
+  "files":["types.d.ts"]
 }

@@ -5,11 +5,11 @@ import CONFIG from "../config/config";
 
 const JWT_SECRET = CONFIG.JWT_SECRET || 'your_secret_key';
 
-export interface AuthRequest extends Request {
-  user?: IUser;
-}
+// export interface AuthRequest extends Request {
+//   user?: any;
+// }
 
-const auth = async (req: AuthRequest, res: Response, next: NextFunction) => {
+const auth = async (req: Request, res: Response, next: NextFunction) => {
   const authHeader = req.header('Authorization');
 
   if (!authHeader || !authHeader.startsWith('Bearer ')) {
