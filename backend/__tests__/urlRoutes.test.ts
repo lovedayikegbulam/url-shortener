@@ -1,23 +1,25 @@
 import request from "supertest";
-import app from "../app";
-import { Url } from "../models/urlModel";
-import client from "../db/connectToRedis";
-import { AuthRequest } from '../middlewares/auth';
+import app from "../src/app";
+import { Url } from "../src/models/urlModel";
+import client from "../src/db/connectToRedis";
+// import { AuthRequest } from '../middlewares/auth';
+import { Request } from "express";
+import { IUser } from '../src/models/User';
 import axios from "axios";
 
-jest.mock("../models/urlModel");
-jest.mock("../db/connectToRedis");
+jest.mock("..src/models/urlModel");
+jest.mock("..src/db/connectToRedis");
 jest.mock("axios");
 jest.mock("jsonwebtoken");
 
 const userId = "123";
 const token = "Bearer mockToken";
-const mockAuth = jest.fn((req: AuthRequest, res, next) => {
+const mockAuth = jest.fn((req: Request, res, next) => {
   req.user = { id: 'testUserId' } as any;
   next();
 });
 
-jest.mock("../middlewares/auth", () => ({
+jest.mock("..src/middlewares/auth", () => ({
   auth: mockAuth,
 }));
 
