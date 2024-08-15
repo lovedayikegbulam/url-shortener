@@ -10,6 +10,7 @@ interface Config {
   REDIS_PASSWORD?: string;
   REDIS_HOST?: string;
   REDIS_PORT?: number;
+  NODE_ENV?: string
 }
 
 const config: Config = {
@@ -21,6 +22,7 @@ const config: Config = {
   REDIS_PASSWORD: process.env.REDIS_PASSWORD,
   REDIS_HOST: process.env.REDIS_HOST,
   REDIS_PORT: Number(process.env.REDIS_PORT),
+  NODE_ENV: process.env.NODE_ENV,
 };
 
 export default config;
