@@ -8,7 +8,7 @@ import {
   getHistory,
 } from '../services/urlService';
 import { isValidUrl } from '../utils/validateUrl';
-// import { Request } from '../middlewares/auth';
+// import { Request, Response } from '../middlewares/auth';
 
 const shortenUrl = async (req: Request, res: Response): Promise<Response> => {
   const { longUrl, customUrl } = req.body;
