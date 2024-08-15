@@ -4,13 +4,9 @@ import client from '../db/connectToRedis';
 import axios from 'axios';
 import CONFIG from '../config/config';
 
-let domainName = "http://localhost:3000/";
+let domainName = CONFIG.DOMAIN_NAME || "http://localhost:3000/";
 
-if(CONFIG.NODE_ENV){
-  if(CONFIG.NODE_ENV == "production"){
-    domainName = 'https://url-shortener-n8yf.onrender.com/'
-  }
-}
+
 
 const generateShortUrl = (longUrl: string, salt: string): string => {
   const newUrl = createHash('sha256').update(longUrl + salt).digest('base64').slice(0, 6);

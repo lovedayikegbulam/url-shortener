@@ -11,6 +11,7 @@ interface Config {
   REDIS_HOST?: string;
   REDIS_PORT?: number;
   NODE_ENV?: string
+  DOMAIN_NAME?: string;
 }
 
 const config: Config = {
@@ -23,6 +24,7 @@ const config: Config = {
   REDIS_HOST: process.env.REDIS_HOST,
   REDIS_PORT: Number(process.env.REDIS_PORT),
   NODE_ENV: process.env.NODE_ENV,
+  DOMAIN_NAME: process.env.DOMAIN_NAME,
 };
 
 export default config;

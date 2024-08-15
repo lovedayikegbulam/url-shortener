@@ -11,6 +11,9 @@ import { isValidUrl } from '../utils/validateUrl';
 // import { Request, Response } from '../middlewares/auth';
 import CONFIG from '../config/config';
 
+const domainName = CONFIG.DOMAIN_NAME || "http://localhost:3000/";
+
+
 
 const shortenUrl = async (req: Request, res: Response): Promise<Response> => {
   const { longUrl, customUrl } = req.body;
@@ -35,17 +38,7 @@ const shortenUrl = async (req: Request, res: Response): Promise<Response> => {
 const redirectUrl = async (req: Request, res: Response): Promise<void> => {
   const { id } = req.params;
 
-  let host = "http://localhost:3000/"
-
-  if(CONFIG.NODE_ENV){
-    if(CONFIG.NODE_ENV == "production"){
-      host = 'https://url-shortener-n8yf.onrender.com/'
-    }
-  }
-
-  const shortUrl = `${host}${id}`
-
-  console.log(shortUrl)
+  const shortUrl = `${domainName}${id}`
 
   try {
     const longUrl = await getLongUrl(shortUrl);
@@ -72,8 +65,9 @@ const getQrCode = async (req: Request, res: Response): Promise<Response> => {
 };
 
 const getLinkAnalytics = async (req: Request, res: Response): Promise<Response> => {
-  const { shortUrl } = req.params;
-  // const userId = req.user?.id;
+  const { id } = req.params;
+
+  const shortUrl = `${domainName}${id}`
 
   try {
     const analytics = await getAnalytics(shortUrl); 
